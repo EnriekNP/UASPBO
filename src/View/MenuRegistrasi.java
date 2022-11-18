@@ -103,6 +103,8 @@ public class MenuRegistrasi implements ActionListener {
             case "Registrasi":
                 if(inputEmail.getText()=="" && inputUsername.getText()=="" && !(Pria.isSelected() || Wanita.isSelected()) && inputkategori.getSelectedItem() =="-" && inputPassword.getPassword().toString()==""){
                 }else{
+                    Controller controller = new Controller();
+                    
                     
                 }
                 break;

@@ -5,13 +5,16 @@
  */
 package View;
 
+import Control.Controller;
 import Model.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -22,9 +25,11 @@ import javax.swing.JTextField;
 public class MenuLogin implements ActionListener {
 
     JFrame frame = new JFrame();
+    JTextField inputUsername;
+    JPasswordField inputPassword;
 
     public MenuLogin() {
-        frame.setTitle("Menu Login");
+        frame.setTitle("Menu Utama");
         frame.setSize(400, 400);
         frame.setLayout(null);
         ImageIcon img = new ImageIcon("");
@@ -35,14 +40,14 @@ public class MenuLogin implements ActionListener {
 
         JLabel username = new JLabel("Username");
         username.setBounds(10, 80, 100, 30);
-        JTextField inputUsername = new JTextField();
+        inputUsername = new JTextField();
         inputUsername.setBounds(120, 80, 200, 30);
         frame.add(username);
         frame.add(inputUsername);
 
         JLabel password = new JLabel("Password");
         password.setBounds(10, 140, 100, 30);
-        JPasswordField inputPassword = new JPasswordField();
+        inputPassword = new JPasswordField();
         inputPassword.setBounds(120, 140, 200, 30);
         frame.add(password);
         frame.add(inputPassword);
@@ -51,7 +56,7 @@ public class MenuLogin implements ActionListener {
         buttonLogin.setBounds(10, 200, 100, 30);
         buttonLogin.addActionListener(this);
         frame.add(buttonLogin);
-        
+
         JButton buttonBack = new JButton("Back");
         buttonBack.setBounds(120, 200, 100, 30);
         buttonBack.addActionListener(this);
@@ -66,7 +71,13 @@ public class MenuLogin implements ActionListener {
         String command = e.getActionCommand();
         switch (command) {
             case "Login":
-               
+                Controller control = new Controller();
+                boolean checkLogin = control.checkLogin(inputUsername.getText(), inputPassword.getPassword());
+                if (checkLogin) {
+                    JOptionPane.showMessageDialog(null, "User ada di database");
+                } else {
+                    JOptionPane.showMessageDialog(null, "User tidak ada di database");
+                }
                 break;
             case "Back":
                 frame.dispose();
